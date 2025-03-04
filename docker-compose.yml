@@ -1,0 +1,31 @@
+services:
+    pg:
+        image: postgres:17
+        container_name: YOMI-POSTGRES
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: yomi_db
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: secret
+            POSTGRES_HOST_AUTH_METHOD: trust
+            POSTGRES_INITDB_ARGS: "--auth-host=trust --auth-local=trust"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+            - ./pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+        ports:
+            - "54329:5432"
+
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: YOMI-PGADMIN
+        restart: unless-stopped
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+            PGADMIN_CONFIG_SERVER_MODE: "False"
+        ports:
+            - "5050:80"
+        depends_on:
+            - pg
+volumes:
+    postgres_data:
