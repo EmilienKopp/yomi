@@ -12,9 +12,6 @@ export default defineConfig({
         }),
         svelte({
             preprocess: vitePreprocess(),
-            compilerOptions: {
-                runes: true,
-            },
         }),
     ],
     resolve: {

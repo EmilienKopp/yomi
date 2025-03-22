@@ -1,9 +1,9 @@
 <script lang="ts">
-  import InputError from '../../../../svelte/Components/InputError.svelte';
-  import InputLabel from '../../../../svelte/Components/InputLabel.svelte';
-  import PrimaryButton from '../../../../svelte/Components/PrimaryButton.svelte';
-  import TextInput from '../../../../svelte/Components/TextInput.svelte';
-  import { Link, useForm, usePage } from '@inertiajs/svelte';
+  import InputError from '$components/InputError.svelte';
+  import InputLabel from '$components/InputLabel.svelte';
+  import PrimaryButton from '$components/PrimaryButton.svelte';
+  import TextInput from '$components/TextInput.svelte';
+  import { Link, useForm, page } from '@inertiajs/svelte';
   import { fade } from 'svelte/transition';
   
   interface Props {
@@ -13,7 +13,7 @@
   
   let { mustVerifyEmail = false, status = '' }: Props = $props();
   
-  const user = usePage().props.auth.user;
+  const user = $page.props.auth.user;
   
   const form = useForm({
     name: user.name,
